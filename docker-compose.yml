@@ -1,0 +1,23 @@
+version: "3" # cannot upgrade to 3.+ because they remove service_healthy condition
+# TODO investigate docker swarm
+
+services:
+  consul:
+    image: hashicorp/consul:latest
+    container_name: consul
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    command: consul agent -dev -ui -client 0.0.0.0
+
+  consul-config-loader:
+    image: jhipster/consul-config-loader:latest
+    volumes:
+      - ./config:/config
+    environment:
+      - CONFIG_MODE=git
+      - CONSUL_URL=consul
+      - ENABLE_SPRING=true
+      - SPRING_CLOUD_CONSUL_CONFIG_FORMAT=files
+      - SPRING_CLOUD_CONSUL_CONFIG_PROFILE-SEPARATOR="-"

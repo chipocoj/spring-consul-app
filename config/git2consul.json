@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "repos": [{
+    "name": "config",
+    "url": "https://github.com/chipocoj/config-repo-example.git",
+    "branches": ["master"],
+    "include_branch_name": false,
+    "hooks": [{
+      "type": "polling",
+      "interval": "1"
+    }]
+  }]
+}
